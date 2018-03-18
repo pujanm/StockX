@@ -47,7 +47,7 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="{% url 'index' %}" class="simple-text">
-									Bank X
+									Stock X
                 </a>
             </div>
 
@@ -56,12 +56,6 @@
                     <a href="{% url 'index' %}">
                         <i class="ti-panel"></i>
                         <p>Dashboard</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'user' %}">
-                        <i class="ti-user"></i>
-                        <p>User Profile</p>
                     </a>
                 </li>
 
@@ -181,26 +175,37 @@
                             </div>
                         </div>
                     </div> -->
+										<form method="post">
+											{% csrf_token %}
+ 												<div class="form-group">
+	 												<label for="text">Enter a stock quote from NASDAQ (e.g: AAPL, FB, GOOGL):</label>
+	 												<input type="text" class="form-control" id="stock" name="stock">
+ 												</div>
+												<div class="form-group">
+	 												<label for="text">How many tweets should I look through to determine the sentiment?</label>
+	 												<input type="text" class="form-control" id="tweets" name="tweets">
+ 												</div>
+ 												<button type="submit" class="btn btn-default">Submit</button>
+										</form>
                     <div style="width: 50%; margin: 0 auto">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
-                                    <div class="col-xs-5">
+                                    <div class="col-md-12">
                                         <div class="icon-big icon-success text-center">
                                             <i class="ti-wallet"></i>
+
                                         </div>
+																				<div class="numbers">
+																						<p style="width:50%; margin: 0 auto;">This will go down by 80.5 tomorrow.</p>
+																				</div>
                                     </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Revenue</p>
-                                            $1,345
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
+                                        <i class="ti-calendar"></i> Today's Analysis
                                     </div>
                                 </div>
                             </div>
@@ -262,9 +267,12 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Users Behavior</h4>
-                                <p class="category">24 Hours performance</p>
+                                <h3 class="title">Market Summary</h3>
+                                <p class="category">This Week's Performance</p>
                             </div>
+														<div class="container-fluid">
+															<h4 style="width:50%; margin: 0 auto;" class="title">Company Name: {{ company }}</h4>
+														</div>
                             <div class="content">
 															<div class="chart-container" style="position: relative; height:60vh; width:60vw">
 																<canvas id="myChart1"></canvas>
@@ -284,33 +292,6 @@
                         </div>
                     </div>
                 </div>
-								<div class="row">
-
-										<div class="col-md-12">
-												<div class="card">
-														<div class="header">
-																<h4 class="title">Users Behavior</h4>
-																<p class="category">24 Hours performance</p>
-														</div>
-														<div class="content">
-															<div class="chart-container" style="position: relative; height:60vh; width:60vw">
-																<canvas id="myChart2"></canvas>
-															</div>
-																<!-- <div class="footer">
-																		<div class="chart-legend">
-																				<i class="fa fa-circle text-info"></i> Open
-																				<i class="fa fa-circle text-danger"></i> Click
-																				<i class="fa fa-circle text-warning"></i> Click Second Time
-																		</div>
-																		<hr>
-																		<div class="stats">
-																				<i class="ti-reload"></i> Updated 3 minutes ago
-																		</div>
-																</div> -->
-														</div>
-												</div>
-										</div>
-								</div>
                 <!-- <div class="row">
                     <div class="col-md-6">
                         <div class="card">
@@ -422,41 +403,38 @@
 
 	<script>
 	var ctx = document.getElementById("myChart1").getContext('2d');
+	var plot1 = {{ open }};
+	var plot2 = {{ close }};
 	var myChart1 = new Chart(ctx, {
-	    type: 'bar',
+	    type: 'line',
 	    data: {
-	        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	        labels: ["Sunday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 	        datasets: [{
-	            label: '# of Votes',
-	            data: [12, 19, 3, 5, 2, 3],
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255,99,132,1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
+	            label: 'Open',
+	            data: plot1,
+							backgroundColor: [
+								 'rgba(255, 99, 132, 0)',
+							 ],
+							borderColor: [
+	                'rgba(255,99,132,1)'
+								],
 	            borderWidth: 1
-	        }]
+	        },
+					{
+			            label: 'Close',
+			            data: plot2,
+									backgroundColor: [
+										 'rgba(65, 123, 216, 0)',
+									 ],
+									borderColor: [
+			                'rgba(65, 123, 216,1)'
+										],
+			            borderWidth: 1
+
+			    }
+				]
 	    },
-	    options: {
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero:true
-	                }
-	            }]
-	        }
-	    }
+
 	});
 	//PIE CHART
 	var ctx = document.getElementById("myChart2").getContext('2d');
