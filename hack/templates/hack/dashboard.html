@@ -197,7 +197,7 @@
 
                                         </div>
 																				<div class="numbers">
-																						<p style="width:50%; margin: 0 auto;">This will go down by 80.5 tomorrow.</p>
+																						<p style="width:50%; margin: 0 auto;">{{ result }}</p>
 																				</div>
                                     </div>
 
@@ -269,12 +269,11 @@
                             <div class="header">
                                 <h3 class="title">Market Summary</h3>
                                 <p class="category">This Week's Performance</p>
+																<h4 class="title">Company Name: {{ company }}</h4>
                             </div>
-														<div class="container-fluid">
-															<h4 style="width:50%; margin: 0 auto;" class="title">Company Name: {{ company }}</h4>
-														</div>
+
                             <div class="content">
-															<div class="chart-container" style="position: relative; height:60vh; width:60vw">
+															<div class="chart-container">
 																<canvas id="myChart1"></canvas>
 															</div>
                                 <!-- <div class="footer">
@@ -292,6 +291,35 @@
                         </div>
                     </div>
                 </div>
+								<div class="row">
+
+										<div class="col-md-12">
+												<div class="card">
+														<div class="header">
+																<h3 class="title">Stock Comparision</h3>
+
+																<h4 class="title">Company Name: {{ company }}</h4>
+														</div>
+
+														<div class="content">
+															<div class="chart-container">
+																<canvas id="bar-chart"></canvas>
+															</div>
+																<!-- <div class="footer">
+																		<div class="chart-legend">
+																				<i class="fa fa-circle text-info"></i> Open
+																				<i class="fa fa-circle text-danger"></i> Click
+																				<i class="fa fa-circle text-warning"></i> Click Second Time
+																		</div>
+																		<hr>
+																		<div class="stats">
+																				<i class="ti-reload"></i> Updated 3 minutes ago
+																		</div>
+																</div> -->
+														</div>
+												</div>
+										</div>
+								</div>
                 <!-- <div class="row">
                     <div class="col-md-6">
                         <div class="card">
@@ -408,7 +436,7 @@
 	var myChart1 = new Chart(ctx, {
 	    type: 'line',
 	    data: {
-	        labels: ["Sunday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+	        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
 	        datasets: [{
 	            label: 'Open',
 	            data: plot1,
@@ -436,43 +464,37 @@
 	    },
 
 	});
-	//PIE CHART
-	var ctx = document.getElementById("myChart2").getContext('2d');
-	var myChart2 = new Chart(ctx, {
-	    type: 'pie',
+	//BAR CHART
+	var chart2 = new Chart(document.getElementById("bar-chart"), {
+	    type: 'bar',
 	    data: {
-	        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-	        datasets: [{
-	            label: '# of Votes',
-	            data: [12, 19, 3, 5, 2, 3],
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255,99,132,1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero:true
-	                }
-	            }]
+	      labels: ["Current", "Predicted"],
+	      datasets: [
+	        {
+	          label: "Analysis",
+	          backgroundColor: ["#3e95cd","#c45850"],
+	          data: [42.049,42.49]
 	        }
-	    }
+	      ]
+	    },
+
+			options: {
+				legend: { display: false },
+	      title: {
+	        display: true,
+	        text: 'Stock Prediction based on Twitter Sentimental Analysis'
+	      },
+		 responsive: true,
+		 scales: {
+				 yAxes: [{
+							ticks: {
+								 min: 0,
+								 stepSize: 8,
+						 }
+
+				 }]
+		 }
+		 }
 	});
 	</script>
 
