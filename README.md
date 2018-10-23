@@ -17,7 +17,7 @@ change in interest rates, forex rates, and negative or positive media coverage.
 
 This was our solution to Stock Price Prediction based on media coverage(Twitter).
 
-### Team Quabanc:
+### Made By Team Quabanc:
 1) [Pujan Mehta](https://github.com/pujanm)
 2) [Dhruv Bhagadia](https://github.com/DhruvBhagadia)  
 3) [Sahil Jajodia](https://github.com/sahiljajodia01)
