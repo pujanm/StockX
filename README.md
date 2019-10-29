@@ -15,6 +15,6 @@ change in interest rates, forex rates, and negative or positive media coverage.
 ### This bar graph shows the user the differnce between today's closing price of the stock and tomorrow's opening price so that he can buy/sell the stock accordingly.
 ![screenshot from 2018-03-18 11-11-51](https://user-images.githubusercontent.com/26873907/37677008-a23e8b74-2c9f-11e8-88f8-9dd8e9ecf58d.png)
 
-This was our solution to Stock Price Prediction based on media coverage(Twitter).
+This was our solution to Stock Price Prediction based on media coverage(Twitter). We used ANNs for NLP task (Yes I know that sounds wrong but we were stupid at that time).
 
 We welcome more ideas!
