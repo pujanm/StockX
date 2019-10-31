@@ -65,7 +65,8 @@ def stock_prediction(stock):
 
     # Create dataset matrix (X=t and Y=t+1)
     def create_dataset(dataset):
-        dataX = [dataset[n+1] for n in range(len(dataset)-2)]
+        rang = len(dataset)-2
+        dataX = [dataset[n+1] for n in range(rang)]
         return np.array(dataX), dataset[2:]
 
     trainX, trainY = create_dataset(dataset)
@@ -78,7 +79,8 @@ def stock_prediction(stock):
     model.fit(trainX, trainY, epochs=200, batch_size=2, verbose=0)
 
     # Our prediction for tomorrow
-    prediction = model.predict(np.array([dataset[0]]))
+    prediction_var = np.array([dataset[0]])
+    prediction = model.predict(prediction_var)
     result = "%s's stock price will move from %s to %s on the next open day of the stock exchange." % (stock, dataset[0], prediction[0][0])
     return result
 
