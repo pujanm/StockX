@@ -15,7 +15,7 @@ cryptography==2.1.4
 cycler==0.10.0
 Cython==0.28
 decorator==4.2.1
-Django==1.11.8
+Django==1.11.28
 docutils==0.14
 entrypoints==0.2.3
 fbprophet==0.2.1
