@@ -98,7 +98,7 @@ Sphinx==1.7.1
 sphinxcontrib-websupport==1.0.1
 spyder==3.2.8
 tensorboard==1.6.0
-tensorflow==1.15.2
+tensorflow==2.7.2
 termcolor==1.1.0
 terminado==0.8.1
 testpath==0.3.1
